@@ -2,24 +2,22 @@
 
 var numberOfDrumButtons = document.querySelectorAll(".drum").length;
 
-for (i = 0; i < numberOfDrumButtons; i++) {
-    document.querySelectorAll(".drum")[i].addEventListener("click", function () {
-        var buttonInnerHTML = this.innerHTML;
+$(".drum").click(function () {
+        var buttonInnerHTML = $(this).html();
 
         makeSound(buttonInnerHTML);
         buttonAmination(buttonInnerHTML);
         
-    });
-}
+});
 
 // Detecting Keyboard Press
 
-document.addEventListener("keydown", function(event){
+$(document).keydown(function(event){
 
     makeSound(event.key);
     buttonAmination(event.key);
 
-})
+});
 
 function makeSound(key){
     switch (key) {
@@ -64,12 +62,14 @@ function makeSound(key){
     }
 }
 
-function buttonAmination(currentKey){
-    var activeButton = document.querySelector("."+ currentKey);
+// Animation on button click or key press
 
-    activeButton.classList.add("pressed");
+function buttonAmination(currentKey){
+    var activeButton = $("."+ currentKey);
+
+    activeButton.addClass("pressed");
 
     setTimeout(function(){
-        activeButton.classList.remove("pressed");
+        activeButton.removeClass("pressed");
     },100)
 }
